@@ -89,21 +89,24 @@ def get_pie_chart(entered_site):
                Input(component_id="payload-slider", component_property="value")))
 
 def get_scatter_chart(site, payload):
-    filtered_df = spacex_df
     if site == 'ALL':
-        fig = px.(filtered_df, values='class', 
-        names= filtered_df["Launch Site"], 
-        title='Success Pie for all Sites')
-        return fig
-    else:
-        filtered_df = spacex_df[spacex_df["Launch Site"] == entered_site]
-        fitlered_df = filtered_df[filtered_df["Payload Mass (kg)"].between(payload[0], payload[1])]
+        filtered_df = spacex_df
+        filtered_df = filtered_df[filtered_df["Payload Mass (kg)"].between(payload[0], payload[1])]
         fig = px.scatter(filtered_df, 
         x=filtered_df["Payload Mass (kg)"],
         y= filtered_df['class'],
         color=filtered_df["Booster Version"],
-        title='Payload Scatter for {}'.format(entered_site))
-fig.show()
+        title='Payload Scatter for All')
+        return fig
+    else:
+        filtered_df = spacex_df[spacex_df["Launch Site"] == site]
+        filtered_df = filtered_df[filtered_df["Payload Mass (kg)"].between(payload[0], payload[1])]
+        fig = px.scatter(filtered_df, 
+        x=filtered_df["Payload Mass (kg)"],
+        y= filtered_df['class'],
+        color=filtered_df["Booster Version"],
+        title='Payload Scatter for {}'.format(site))
+        return fig
 
 # Run the app
 if __name__ == '__main__':
