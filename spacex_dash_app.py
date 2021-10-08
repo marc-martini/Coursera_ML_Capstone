@@ -95,7 +95,7 @@ def get_scatter_chart(site, payload):
         fig = px.scatter(filtered_df, 
         x=filtered_df["Payload Mass (kg)"],
         y= filtered_df['class'],
-        color=filtered_df["Booster Version"],
+        color=filtered_df["Booster Version Category"],
         title='Payload Scatter for All')
         return fig
     else:
@@ -104,7 +104,7 @@ def get_scatter_chart(site, payload):
         fig = px.scatter(filtered_df, 
         x=filtered_df["Payload Mass (kg)"],
         y= filtered_df['class'],
-        color=filtered_df["Booster Version"],
+        color=filtered_df["Booster Version Category"],
         title='Payload Scatter for {}'.format(site))
         return fig
 
